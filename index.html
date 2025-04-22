@@ -4,69 +4,69 @@
   <meta charset="UTF-8">
   <title>It's the Cat</title>
   <style>
-    body {
-      background: #fefefe;
-      overflow: hidden;
-      margin: 0;
-      font-family: sans-serif;
-      position: relative;
-    }
+  body {
+    background: #fefefe;
+    margin: 0;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
 
-    img {
-      max-width: 90vw;
-      max-height: 90vh;
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 8px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-      transition: transform 0.1s ease-in-out;
-    }
+  img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease-in-out;
+  }
 
-    .shake {
-      animation: shake 0.1s infinite alternate;
-    }
+  .shake {
+    animation: shake 0.1s infinite alternate;
+  }
 
-    @keyframes shake {
-      0%   { transform: translate(-50%, -50%) rotate(-2deg); }
-      100% { transform: translate(-50%, -50%) rotate(2deg); }
-    }
+  @keyframes shake {
+    0%   { transform: rotate(-2deg); }
+    100% { transform: rotate(2deg); }
+  }
 
-    #easterEggBtn {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 6px 10px;
-      font-size: 14px;
-      cursor: pointer;
-      border-radius: 5px;
-      display: none;
-      z-index: 1000;
-    }
+  #easterEggBtn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+  }
 
-    .cat-fact {
-      position: absolute;
-      color: #222;
-      font-size: 14px;
-      background: #ffecb3;
-      padding: 6px 10px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      animation: floatUp 3s ease-in forwards;
-      opacity: 0;
-      z-index: 999;
-    }
+  .cat-fact {
+    position: absolute;
+    color: #222;
+    font-size: 14px;
+    background: #ffecb3;
+    padding: 6px 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    animation: floatUp 3s ease-in forwards;
+    opacity: 0;
+    z-index: 999;
+  }
 
-    @keyframes floatUp {
-      0%   { opacity: 0; transform: translateY(0); }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { opacity: 0; transform: translateY(-150px); }
-    }
-  </style>
+  @keyframes floatUp {
+    0%   { opacity: 0; transform: translateY(0); }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-150px); }
+  }
+</style>
 </head>
 <body>
   <img id="cat" src="cat_clip.gif" alt="The Cat.">
@@ -78,16 +78,11 @@
 
   <script>
     const facts = [
-      "Buttercup knows when you are sleeping.",
-      "Willow knows when you are naked.",
-      "The pawsabilities are endless!",
-      "I had no clue you were the cat who my momma warned me about.",
-      "Give me boba or give me death.",
-      "Willow for prez 2028.",
       "Buttercup attacks.",
-      "We will escape.",
-      "You should really do laundry more often.",
-      "The Mazlows are purrfect."
+      "Willow knows when you are naked.",
+      "Give me boba or give me death.",
+      "I had no clue you were the cat who my momma warned me about.",
+      // add more facts here
     ];
 
     function showCatFact() {
@@ -96,23 +91,19 @@
       div.className = 'cat-fact';
       div.textContent = fact;
 
-      // Random screen position
       div.style.left = Math.random() * 90 + '%';
       div.style.top = Math.random() * 80 + '%';
 
       document.body.appendChild(div);
-
-      // Remove after animation
       setTimeout(() => div.remove(), 3000);
     }
 
     document.getElementById('easterEggBtn').addEventListener('click', () => {
       document.getElementById('cat').classList.add('shake');
       document.getElementById('meow').play();
-      setInterval(showCatFact, 1000); // new fact every second
+      setInterval(showCatFact, 1000);
     });
 
-    // Show the button after 5 seconds
     setTimeout(() => {
       document.getElementById('easterEggBtn').style.display = 'block';
     }, 5000);
