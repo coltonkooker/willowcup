@@ -12,16 +12,59 @@
       height: 100vh;
       margin: 0;
       font-family: sans-serif;
+      position: relative;
     }
+
     img {
       max-width: 90vw;
       max-height: 90vh;
       border-radius: 8px;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.1s ease-in-out;
+    }
+
+    .shake {
+      animation: shake 0.1s infinite alternate;
+    }
+
+    @keyframes shake {
+      0%   { transform: rotate(-2deg) translate(-2px, 0); }
+      100% { transform: rotate(2deg) translate(2px, 0); }
+    }
+
+    #easterEggBtn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <img src="cat_clip.gif" alt="The Cat.">
+  <img id="cat" src="cat.gif" alt="The Cat.">
+  <button id="easterEggBtn">Do not click</button>
+
+  <audio id="meow" loop>
+    <source src="Meow-2.wav" type="audio/wav">
+  </audio>
+
+  <script>
+    // Show the button after 5 seconds
+    setTimeout(() => {
+      document.getElementById('easterEggBtn').style.display = 'block';
+    }, 5000);
+
+    // Easter egg logic
+    document.getElementById('easterEggBtn').addEventListener('click', () => {
+      document.getElementById('cat').classList.add('shake');
+      document.getElementById('meow').play();
+    });
+  </script>
 </body>
 </html>
