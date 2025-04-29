@@ -77,65 +77,65 @@
   </audio>
 
   <script>
-    // Array of cat images
-    const catImages = [
-      "willcup1.jpg",
-      "willcup2.jpg",
-      "willcup3.jpg",
-      "willcup4.jpg",
-      "willcup5.jpg",
-      "willcup6.jpg",
-      "willcup7.jpg",
-      "willcup8.jpg",
-      "willcup9.jpg",
-      "cat-clip.gif"
-    ];
+    window.onload = function () {
+      // Daily image rotation
+      const catImages = [
+        "cat1.jpg",
+        "cat2.jpg",
+        "cat3.jpg",
+        "cat4.jpg",
+        "cat5.jpg",
+        "cat6.jpg",
+        "cat7.jpg",
+        "cat8.jpg",
+        "cat9.jpg"
+      ];
 
-    // Function to select the cat image of the day
-    function getCatOfTheDay() {
-      const today = new Date();
-      const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-      const index = dayOfYear % catImages.length;
-      return catImages[index];
-    }
+      function getCatOfTheDay() {
+        const today = new Date();
+        const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+        const index = dayOfYear % catImages.length;
+        return catImages[index];
+      }
 
-    // Set today's cat image
-    document.getElementById('cat').src = getCatOfTheDay();
+      document.getElementById('cat').src = getCatOfTheDay();
 
-    // Easter Egg - Do Not Click button
-    const facts = [
-      "Buttercup knows when you are sleeping.",
-      "Willow knows when you are naked.",
-      "Give me boba or give me death.",
-      "I had no clue you were the cat who my momma warned me about.",
-      "The Mazlows are purrrfect.",
-      "The pawsabilities are endless.",
-      "Where's nate when you need him.",
-      "We remember... everything.",
-      "Sober? More like sopurr.",
-    ];
+      // Custom cat fact explosion quotes
+      const facts = [
+        "Buttercup knows when you are sleeping.",
+        "Willow knows when you are naked.",
+        "Give me boba or give me death.",
+        "I had no clue you were the cat who my momma warned me about.",
+        "The Mazlows are purrrfect.",
+        "The pawsabilities are endless.",
+        "Where's Nate when you need him.",
+        "We remember... everything.",
+        "Sober? More like sopurr."
+      ];
 
-    function showCatFact() {
-      const fact = facts[Math.floor(Math.random() * facts.length)];
-      const div = document.createElement('div');
-      div.className = 'cat-fact';
-      div.textContent = fact;
-      div.style.left = Math.random() * 90 + '%';
-      div.style.top = Math.random() * 80 + '%';
-      document.body.appendChild(div);
-      setTimeout(() => div.remove(), 3000);
-    }
+      function showCatFact() {
+        const fact = facts[Math.floor(Math.random() * facts.length)];
+        const div = document.createElement('div');
+        div.className = 'cat-fact';
+        div.textContent = fact;
+        div.style.left = Math.random() * 90 + '%';
+        div.style.top = Math.random() * 80 + '%';
+        document.body.appendChild(div);
+        setTimeout(() => div.remove(), 3000);
+      }
 
-    document.getElementById('easterEggBtn').addEventListener('click', () => {
-      document.getElementById('cat').classList.add('shake');
-      document.getElementById('meow').play();
-      setInterval(showCatFact, 1000); // show a new cat fact every second
-    });
+      // Easter Egg button logic
+      document.getElementById('easterEggBtn').addEventListener('click', () => {
+        document.getElementById('cat').classList.add('shake');
+        document.getElementById('meow').play();
+        setInterval(showCatFact, 1000);
+      });
 
-    // Show the button after 5 seconds
-    setTimeout(() => {
-      document.getElementById('easterEggBtn').style.display = 'block';
-    }, 5000);
+      // Reveal button after 5 seconds
+      setTimeout(() => {
+        document.getElementById('easterEggBtn').style.display = 'block';
+      }, 5000);
+    };
   </script>
 </body>
 </html>
