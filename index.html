@@ -1,142 +1,1250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>It's the Cat</title>
-  <style>
-    body {
-      background: #fefefe;
-      margin: 0;
-      font-family: sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ballad of Emerson & Willow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5edd8;
+    --paper-dark: #ede0c4;
+    --sepia: #8b6914;
+    --sepia-light: #c49a2a;
+    --rust: #8b3a1a;
+    --rust-light: #c4532a;
+    --muted: #6b5a3e;
+    --locked-bg: #2a2018;
+    --locked-text: #5a4e38;
+  }
 
-    img {
-      max-width: 90vw;
-      max-height: 90vh;
-      border-radius: 8px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-      transition: transform 0.1s ease-in-out;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .shake {
-      animation: shake 0.1s infinite alternate;
-    }
+  body {
+    background-color: #1a1208;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.012) 2px,
+        rgba(255,255,255,0.012) 4px
+      ),
+      radial-gradient(ellipse at 20% 50%, rgba(139,105,20,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(139,58,26,0.06) 0%, transparent 50%);
+    min-height: 100vh;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    color: var(--paper);
+  }
 
-    @keyframes shake {
-      0%   { transform: rotate(-2deg); }
-      100% { transform: rotate(2deg); }
-    }
+  /* ── HEADER ── */
+  .site-header {
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
 
-    #easterEggBtn {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 6px 10px;
-      font-size: 14px;
-      cursor: pointer;
-      border-radius: 5px;
-      display: none;
-      z-index: 1000;
-    }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 4rem;
+    background: linear-gradient(to bottom, transparent, var(--sepia));
+  }
 
-    .cat-fact {
-      position: absolute;
-      color: #222;
-      font-size: 14px;
-      background: #ffecb3;
-      padding: 6px 10px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      animation: floatUp 3s ease-in forwards;
-      opacity: 0;
-      z-index: 999;
-    }
+  .header-ornament {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sepia-light);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
 
-    @keyframes floatUp {
-      0%   { opacity: 0; transform: translateY(0); }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { opacity: 0; transform: translateY(-150px); }
-    }
-  </style>
+  .site-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--paper);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 20px rgba(196,154,42,0.2);
+  }
+
+  .site-subtitle {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sepia-light);
+    margin-bottom: 2.5rem;
+    opacity: 0.7;
+  }
+
+  .header-rule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto 2rem;
+  }
+  .header-rule::before,
+  .header-rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--sepia));
+  }
+  .header-rule::after {
+    background: linear-gradient(to left, transparent, var(--sepia));
+  }
+  .header-rule-diamond {
+    width: 6px; height: 6px;
+    background: var(--sepia-light);
+    transform: rotate(45deg);
+  }
+
+  .dedication {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-section {
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+  }
+  .progress-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sepia-light);
+    opacity: 0.7;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+  .progress-track {
+    display: flex;
+    gap: 4px;
+    height: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-segment {
+    flex: 1;
+    background: var(--locked-text);
+    border-radius: 2px;
+    transition: background 0.4s;
+  }
+  .progress-segment.unlocked {
+    background: var(--sepia-light);
+  }
+
+  /* ── CHAPTERS GRID ── */
+  .chapters-container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 1.5rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ── CHAPTER CARD ── */
+  .chapter-card {
+    border-top: 1px solid rgba(139,105,20,0.2);
+    padding: 2.5rem 0;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .chapter-card:last-child {
+    border-bottom: 1px solid rgba(139,105,20,0.2);
+  }
+  .chapter-card.unlocked:hover {
+    background: rgba(139,105,20,0.04);
+  }
+
+  .chapter-card-inner {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .chapter-number-col {
+    text-align: right;
+    padding-top: 4px;
+  }
+  .chapter-numeral {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--sepia);
+    opacity: 0.5;
+  }
+  .chapter-card.unlocked .chapter-numeral {
+    opacity: 1;
+    color: var(--sepia-light);
+  }
+  .chapter-date-small {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: block;
+    margin-top: 4px;
+  }
+
+  .chapter-content-col {}
+
+  .chapter-label-tag {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sepia-light);
+    opacity: 0.6;
+    margin-bottom: 0.4rem;
+  }
+  .chapter-card.unlocked .chapter-label-tag {
+    opacity: 1;
+  }
+
+  .chapter-title-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.2;
+    color: var(--paper);
+    margin-bottom: 0.3rem;
+  }
+  .chapter-card.locked .chapter-title-main {
+    color: var(--locked-text);
+  }
+
+  .chapter-subtitle-main {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.9rem;
+    line-height: 1.5;
+  }
+  .chapter-card.locked .chapter-subtitle-main {
+    color: var(--locked-text);
+    opacity: 0.6;
+  }
+
+  .chapter-excerpt {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 520px;
+  }
+
+  /* locked state */
+  .chapter-card.locked .chapter-excerpt {
+    display: none;
+  }
+
+  .locked-indicator {
+    display: none;
+  }
+  .chapter-card.locked .locked-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--locked-text);
+  }
+  .locked-indicator svg {
+    opacity: 0.5;
+  }
+
+  .countdown-text {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--locked-text);
+    margin-top: 0.4rem;
+  }
+
+  .read-cta {
+    display: none;
+  }
+  .chapter-card.unlocked .read-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sepia-light);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .chapter-card.unlocked:hover .read-cta {
+    opacity: 1;
+  }
+
+  /* ── MODAL / READER ── */
+  .reader-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,8,4,0.92);
+    z-index: 100;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+    backdrop-filter: blur(4px);
+  }
+  .reader-overlay.open {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reader-inner {
+    max-width: 660px;
+    margin: 0 auto;
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 3.5rem 3rem 4rem;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+    animation: slideUp 0.35s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .reader-close {
+    position: absolute;
+    top: 1.25rem; right: 1.5rem;
+    background: none;
+    border: none;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s;
+  }
+  .reader-close:hover { color: var(--ink); }
+
+  .reader-chapter-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    margin-bottom: 0.75rem;
+  }
+
+  .reader-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+
+  .reader-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .reader-rule {
+    border: none;
+    border-top: 1px solid rgba(139,105,20,0.3);
+    margin: 0 0 2.5rem;
+  }
+
+  .reader-body p {
+    font-size: 1.025rem;
+    line-height: 1.9;
+    color: #2a200e;
+    margin-bottom: 1.3rem;
+    font-family: 'Libre Baskerville', serif;
+  }
+  .reader-body em {
+    font-style: italic;
+  }
+
+  .reader-divider {
+    border: none;
+    border-top: 1px solid rgba(139,105,20,0.25);
+    margin: 2.5rem 0;
+  }
+
+  .reader-cutaway-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    margin-bottom: 0.75rem;
+    opacity: 0.8;
+  }
+
+  .reader-cutaway {
+    background: #ede0c4;
+    border-left: 3px solid rgba(139,105,20,0.35);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 2px 2px 0;
+  }
+  .reader-cutaway p {
+    font-size: 0.92rem !important;
+    font-style: italic;
+    color: #4a3820 !important;
+    margin-bottom: 0.9rem !important;
+  }
+  .reader-cutaway p:last-child { margin-bottom: 0 !important; }
+
+  .reader-part-header {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    margin: 2.5rem 0 1.25rem;
+    opacity: 0.8;
+  }
+
+  .reader-end-note {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(139,105,20,0.25);
+    line-height: 2;
+  }
+
+  .reader-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(139,105,20,0.2);
+  }
+  .reader-nav-btn {
+    background: none;
+    border: 1px solid rgba(139,105,20,0.3);
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 1px;
+  }
+  .reader-nav-btn:hover {
+    background: rgba(139,105,20,0.1);
+    border-color: var(--sepia);
+  }
+  .reader-nav-btn:disabled {
+    opacity: 0.2;
+    cursor: default;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.4;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .reader-inner { padding: 2.5rem 1.5rem 3rem; }
+    .chapter-card-inner { grid-template-columns: 50px 1fr; gap: 1rem; }
+    .chapter-numeral { font-size: 1.8rem; }
+  }
+</style>
 </head>
 <body>
-  <img id="cat" src="" alt="The Cat.">
-  <button id="easterEggBtn">Do not click</button>
 
-  <audio id="meow" loop>
-    <source src="Meow-2.wav" type="audio/wav">
-  </audio>
+<header class="site-header">
+  <p class="header-ornament">A serialized adventure</p>
+  <h1 class="site-title">The Ballad of<br>Emerson & Willow</h1>
+  <p class="site-subtitle">In ten chapters &nbsp;·&nbsp; with a cat</p>
+  <div class="header-rule"><div class="header-rule-diamond"></div></div>
+  <p class="dedication">For Emerson — adventurer, banjo player,<br>and the kind of person who apologizes to ants.</p>
+</header>
 
-  <script>
-    window.onload = function () {
-      // Daily image rotation
-      const catImages = [
-        "willcup1.jpg",
-        "willcup2.jpg",
-        "willcup3.jpg",
-        "willcup4.jpg",
-        "willcup5.jpg",
-        "willcup6.jpg",
-        "willcup7.jpg",
-        "willcup8.jpg",
-        "willcup9.jpg",
-        "cat_clip.gif"
-      ];
+<div class="progress-section">
+  <p class="progress-label" id="progress-label">Loading your story...</p>
+  <div class="progress-track" id="progress-track"></div>
+</div>
 
-      function getCatOfTheDay() {
-        const today = new Date();
-        const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-        const index = dayOfYear % catImages.length;
-        return catImages[index];
-      }
+<main class="chapters-container" id="chapters-container"></main>
 
-      document.getElementById('cat').src = getCatOfTheDay();
+<!-- READER MODAL -->
+<div class="reader-overlay" id="reader-overlay" role="dialog" aria-modal="true">
+  <div class="reader-inner" id="reader-inner">
+    <button class="reader-close" id="reader-close" onclick="closeReader()">✕ Close</button>
+    <div id="reader-content"></div>
+    <nav class="reader-nav">
+      <button class="reader-nav-btn" id="prev-btn" onclick="navigateChapter(-1)">← Previous</button>
+      <button class="reader-nav-btn" id="next-btn" onclick="navigateChapter(1)">Next →</button>
+    </nav>
+  </div>
+</div>
 
-      // Custom cat fact explosion quotes
-      const facts = [
-        "Buttercup knows when you are sleeping.",
-        "Willow knows when you are naked.",
-        "Give me boba or give me death.",
-        "I had no clue you were the cat who my momma warned me about.",
-        "The Mazlows are purrrfect.",
-        "The pawsabilities are endless.",
-        "Where's Nate when you need him.",
-        "We remember... everything.",
-        "Sober? More like sopurr."
-      ];
 
-      function showCatFact() {
-        const fact = facts[Math.floor(Math.random() * facts.length)];
-        const div = document.createElement('div');
-        div.className = 'cat-fact';
-        div.textContent = fact;
-        div.style.left = Math.random() * 90 + '%';
-        div.style.top = Math.random() * 80 + '%';
-        document.body.appendChild(div);
-        setTimeout(() => div.remove(), 3000);
-      }
+<!-- PASSWORD GATE -->
+<div id="password-gate" style="position:fixed;inset:0;background:#1a1208;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;">
+  <p style="font-family:'Special Elite',cursive;font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:#8b6914;margin-bottom:1.5rem;opacity:0.8;">A serialized adventure</p>
+  <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;font-style:italic;color:#f5edd8;text-align:center;margin-bottom:0.5rem;line-height:1.2;">The Ballad of<br>Emerson & Willow</h1>
+  <p style="font-family:'Special Elite',cursive;font-size:0.7rem;letter-spacing:0.25em;color:#8b6914;margin-bottom:3rem;opacity:0.7;">Enter the password to continue</p>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;width:100%;max-width:280px;">
+    <input id="password-input" type="password" placeholder="password" autocomplete="off" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(139,105,20,0.4);padding:0.6rem 0;font-family:'Special Elite',cursive;font-size:1rem;letter-spacing:0.2em;color:#f5edd8;text-align:center;outline:none;">
+    <button onclick="submitPassword()" style="margin-top:0.5rem;background:none;border:1px solid rgba(139,105,20,0.4);font-family:'Special Elite',cursive;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#c49a2a;padding:0.7rem 2rem;cursor:pointer;transition:all 0.2s;border-radius:1px;">Enter</button>
+    <p id="password-error" style="font-family:'Special Elite',cursive;font-size:0.65rem;letter-spacing:0.15em;color:#8b3a1a;opacity:0;transition:opacity 0.3s;">Try again</p>
+  </div>
+</div>
 
-      // Easter Egg button logic
-      document.getElementById('easterEggBtn').addEventListener('click', () => {
-        document.getElementById('cat').classList.add('shake');
-        document.getElementById('meow').play();
-        setInterval(showCatFact, 1000);
-      });
+<footer class="site-footer">A gift &nbsp;·&nbsp; built with love &nbsp;·&nbsp; do not feed the frogs</footer>
 
-      // Reveal button after 5 seconds
-      setTimeout(() => {
-        document.getElementById('easterEggBtn').style.display = 'block';
-      }, 5000);
-    };
-  </script>
+<script>
+// ─── RELEASE DATES ───────────────────────────────────────────────────────────
+// Chapter 1 unlocks April 26, Chapter 2 April 27 (birthday), then daily
+const RELEASE_DATES = [
+  new Date('2025-04-26T00:00:00'),
+  new Date('2025-04-27T00:00:00'),
+  new Date('2025-04-28T00:00:00'),
+  new Date('2025-04-29T00:00:00'),
+  new Date('2025-04-30T00:00:00'),
+  new Date('2025-05-01T00:00:00'),
+  new Date('2025-05-02T00:00:00'),
+  new Date('2025-05-03T00:00:00'),
+  new Date('2025-05-04T00:00:00'),
+  new Date('2025-05-05T00:00:00'),
+];
+
+// ─── CHAPTER DATA ─────────────────────────────────────────────────────────────
+const CHAPTERS = [
+  {
+    number: 'I',
+    title: 'The Kidnapping',
+    subtitle: 'In which everything is fine, and then it isn\'t',
+    excerpt: 'It was a Tuesday, which Emerson had always found to be a perfectly good day. He was floating above Red Rocks Amphitheatre, binoculars raised, trying to spy on whichever band was doing soundcheck below.',
+    content: `
+      <p>It was a Tuesday, which Emerson had always found to be a perfectly good day. Not flashy like Friday, not melancholy like Sunday. Just a solid, dependable Tuesday. He was doing what he usually did on Tuesdays: floating approximately 400 feet above Red Rocks Amphitheatre in his hot-air balloon, binoculars raised, trying to spy on whichever band was doing soundcheck below.</p>
+      <p>Willow was not interested in the band. She was sitting near the edge of the basket in the precise way that cats sit when they want you to know they could leave at any time but are choosing not to. Her tail moved exactly once per minute. She found this calming.</p>
+      <p>"I think that's Billy Strings down there," Emerson whispered, adjusting the binoculars. "Or possibly a very talented scarecrow. Hard to say at this altitude." He offered Willow a piece of his kale chip. She did not take it. He ate it himself. "Totally valid," he said.</p>
+      <p>That was when his phone buzzed.</p>
+      <p>It was a video. No contact name. Just a number he didn't recognize. He squinted at the screen — his phone was so old that everything on it looked like it was being transmitted through a layer of ancient fog, every notification arriving as if from a distant civilization. The case had deteriorated so badly that it was actively crumbling in his hands as he held it, small flakes of rubber drifting peacefully off the balloon basket and down toward Morrison, Colorado.</p>
+      <p>He managed to make out twelve seconds of footage that made his stomach drop straight through the wicker basket floor and all the way down onto the red rocks below.</p>
+      <p>Delaney. And Buttercup. In a cage. Behind them, a banner that read: <em>BRANDYWINE AND THE MIGHTY FINES: WE TOLD YOU THIS WASN'T OVER, EMERSON.</em></p>
+      <p>And then, in smaller text below: <em>P.S. You always played the banjo too enthusiastically and it threw off our whole vibe.</em></p>
+      <p>Emerson stared at the disintegrating screen for a long time. A chunk of phone case the size of a grape fell off into the void. Willow padded over, looked at the phone, then looked at Emerson.</p>
+      <p>"I told you you should have gotten a new phone case," she said. "They're not that expensive."</p>
+      <p>Emerson opened his mouth. Closed it. This was not the moment to explain his feelings about unnecessary consumerism.</p>
+      <p>"Willow," he said instead. "We have to go get them."</p>
+      <p>Willow flicked her tail once. Agreement, and also: <em>we will be returning to the phone case conversation.</em></p>
+      <p>Emerson pulled a crinkled piece of paper from his jacket pocket. He had received it three days ago, slipped under the door of the balloon's gondola while he was asleep somewhere over the Eastern Plains. He hadn't known what to make of it then. Now it made terrible sense. It was a list of seven names, each one stranger than the last. At the bottom, in handwriting that was either very dramatic or written by someone in a hurry, a single line:</p>
+      <p><em>Defeat them all. Then you'll find Brandywine.</em></p>
+      <p>He looked at the list. He looked at Willow. He looked at the horizon, where the sun was dropping behind the Rockies in a way that was genuinely beautiful and which he took a moment to appreciate because that is simply who Emerson is.</p>
+      <p>"Alright," he said, adjusting the burner. The balloon climbed higher. "First stop: Memphis."</p>
+    `,
+    cutaway: `
+      <p>The cage was not uncomfortable, exactly. Delaney had found a loose bolt on the left wall within about four minutes. She hadn't said anything about it yet because she was still assessing the full situation, the way you do when you're a third-grade teacher and you've learned that sometimes you let a thing develop before you intervene.</p>
+      <p>Buttercup was vibrating with energy, pupils fully dilated, tail puffed to maximum capacity. She had already bitten through one zip tie and was working on a second.</p>
+      <p>"We're okay," Delaney said cheerfully, to no one in particular. "We're doing great. This is a fun little adventure."</p>
+      <p>She examined the bolt again. Yep. Hand-tighten loose. Maybe a quarter turn.</p>
+      <p>"We'll give Emerson a little head start," she decided. "He'll want to feel helpful."</p>
+    `
+  },
+  {
+    number: 'II',
+    title: 'The DJ Mummies of Memphis',
+    subtitle: 'In which Nate knows a lot of things, and one of them is useful',
+    excerpt: 'Memphis appeared below them just after dawn, the Mississippi River catching the early light like it was showing off. Emerson had barely slept. Willow had slept extremely well, which she felt no need to apologize for.',
+    content: `
+      <p>Memphis appeared below them just after dawn, the Mississippi River catching the early light like it was showing off. Emerson had barely slept. Willow had slept extremely well, which she felt no need to apologize for.</p>
+      <p>They touched down in a field outside the city next to a tour bus with a broken axle and the words <em>TURNPIKE TROUBADOURS</em> painted on the side in letters that had seen better decades. Three men in dusty boots were sitting in the grass next to it, looking at the bus the way you look at something you love that has let you down.</p>
+      <p>"You folks need help?" Emerson called, already climbing out of the basket.</p>
+      <p>"Mummies got our alternator," he said simply.</p>
+      <p>Emerson nodded like this made sense, because in the last eighteen hours, it had started to. He spent forty-five minutes helping them get the bus running, refused three separate offers of money, accepted one piece of cornbread, and gave the guitarist his extra bungee cord because it seemed like it might be useful. As Emerson climbed back into the balloon, the tall one pressed a hand-drawn map into his palm.</p>
+      <p>"That's where they set up," he said. "Old warehouse on Beale Street. They play from midnight to four. Don't let 'em get to the horn solo or you'll be there till sunrise." He paused. "We appreciate you, man."</p>
+      <p>Emerson waved it off. "I appreciate <em>you</em>," he said, completely sincerely, and meant it so much that it was briefly a little overwhelming for everyone present.</p>
+      <p>He called Nate from the balloon at eleven-thirty. The phone case shed another layer. Willow watched a chunk of it spiral downward and said nothing.</p>
+      <p>"Nate," Emerson said when he picked up. "I need to know how to defeat DJ mummies. They play energetic jazz. I have until midnight."</p>
+      <p>There was a familiar sound in the background: the low, rhythmic thump of Nate slapping his bass. He always did this when he was thinking. It was, depending on the moment, either very helpful or completely maddening.</p>
+      <p>"Okay so," Nate said. "Did you know that the average mummy is wrapped in about four thousand square feet of linen?"</p>
+      <p>"Nate —"</p>
+      <p>"Which is wild because that's roughly the square footage of a pretty nice house. And speaking of houses, in <em>Home Alone</em>, the McCallister family had to have been making at least two hundred and fifty thousand a year, adjusted for inflation, to afford that place in Winnetka. That's a lot of cheese pizza."</p>
+      <p>"Nate, the mummies —"</p>
+      <p>"Right, right. So linen. Linen is a natural fiber, right, which means it's basically just very organized flax. Flax was huge in ancient Egypt — they grew it along the Nile. The Nile, by the way, flows <em>north</em>, which blew my mind when I found out. Most rivers you picture going the other way." A pause, more bass slapping. "Like in <em>The African Queen</em>, Bogart is going upstream the whole time, which —"</p>
+      <p>"NATE."</p>
+      <p>"Dry air," Nate said, suddenly crisp and focused. "Linen tightens in dry air. That's how they were preserved. Which means the one thing mummies absolutely cannot stand is humidity. Like, high humidity makes the wrappings expand and go all loose and weird and they lose all their structural integrity. You want to beat a mummy? Get them somewhere wet. Like, truly, profoundly, swampily wet." Another bass slap. "That's basically the plot of <em>The Mummy Returns</em> if you think about it."</p>
+      <p>Emerson stared at the map. The warehouse on Beale Street was three blocks from the Mississippi River. He looked at the balloon's emergency equipment locker, which he had never opened but always assumed contained useful things. He opened it. Inside: one industrial water pump, a coil of hose, and a sticky note that said <em>you'll know when.</em></p>
+      <p>"Nate," Emerson said slowly. "I love you, man."</p>
+      <p>"I love you too, buddy. Oh — also, did you know that jazz was invented literally in New Orleans, which is extremely humid, so it's actually kind of insane that mummies are playing it at all. That's like a shark hosting a swimming lesson."</p>
+      <p>Emerson hung up, already uncoiling the hose.</p>
+      <p>The warehouse was everything the map promised: dark, loud, and absolutely throbbing with the most aggressively joyful jazz Emerson had ever heard. The mummies were good. He had to admit that. Their bandleader — a particularly well-wrapped specimen with a tiny sequined DJ booth — was in the middle of something genuinely impressive on the turntables, and the horn section was building toward a solo that Emerson absolutely could not let happen.</p>
+      <p>He found the river access. He connected the hose. He looked at Willow, who was sitting in a small backpack on his chest because they had agreed this was the safest configuration for active situations.</p>
+      <p>"Ready?" he said.</p>
+      <p>Willow blinked once. <em>Obviously.</em></p>
+      <p>The water came in fast and low, rolling across the warehouse floor in a warm Mississippi wave. The mummies noticed immediately. There was a collective sound — somewhere between a groan and a trombone — as four thousand square feet of linen per mummy began to swell, droop, and unravel in real time. The DJ's sequined booth shorted out. The horn player's wrappings fell over his eyes mid-note. The bandleader looked down at his hands, then at Emerson, then made a gesture that was either a curse or a grudging salute.</p>
+      <p>The music stopped.</p>
+      <p>In the sudden silence, something small and glowing rolled across the wet floor and stopped at Emerson's feet. He picked it up. It was a key — old brass, shaped like a scarab — with a tag that read: <em>1 of 7.</em></p>
+      <p>He held it up. Willow examined it with the focused attention of someone who has been taking this whole thing more seriously than anyone else from the start.</p>
+      <p>"Six more," Emerson said quietly.</p>
+      <p>He looked at the list. Next up: the Pacific Northwest.</p>
+    `,
+    cutaway: `
+      <p>The bolt had come off completely now. Delaney was holding it in her palm, looking at it thoughtfully. Buttercup had bitten through four zip ties and was working on what appeared to be a padlock, which was ambitious even for her.</p>
+      <p>"Now," Delaney said, in the gentle tone she used when introducing a new concept to her class, "what we're going to do is take our time. We're going to be patient, we're going to be kind to ourselves, and we are going to get out of here in a very organized fashion."</p>
+      <p>Buttercup headbutted the padlock so hard it spun off the clasp and clattered across the floor.</p>
+      <p>"Beautiful," said Delaney. "That's exactly what I was going to suggest."</p>
+    `
+  },
+  {
+    number: 'III',
+    title: 'The Sasquatch Saxophonist',
+    subtitle: 'In which Pat is eating mac and cheese and has some thoughts',
+    excerpt: 'The Pacific Northwest arrived the way it always does: gradually, and then all at once, the landscape shifting from scrubland to towering Doug firs so dense you couldn\'t see the ground.',
+    content: `
+      <p>The Pacific Northwest arrived the way it always does: gradually, and then all at once, the landscape below shifting from scrubland to towering Doug firs so dense you couldn't see the ground. Emerson had been flying for two days. He had eaten his last kale chip somewhere over Idaho and was now running on cornbread and optimism, which, for Emerson, was actually a pretty normal operating state.</p>
+      <p>Willow sat at the prow of the basket like a figurehead, nose working at the cool, wet air. She seemed to approve of the Pacific Northwest. Everything smelled serious up here.</p>
+      <p>The second key was somewhere in these woods. Emerson could feel it. He could also hear it, faintly — a deep, mournful saxophone note drifting up through the tree canopy like smoke, beautiful and slightly alarming.</p>
+      <p>He called Pat before he landed.</p>
+      <p>Pat picked up on the fourth ring. In the background: the specific crunch of someone eating mac and cheese directly from the pot, and the distant sound of someone studying a trail map with aggressive intent.</p>
+      <p>"Emerson," Pat said, chewing.</p>
+      <p>"Pat. There's a Sasquatch in these woods. Plays saxophone. Deeply emotional. I need to know how to beat him."</p>
+      <p>A long pause. More crunching. "How emotional are we talking."</p>
+      <p>"The kind where you can hear it from eight hundred feet up."</p>
+      <p>"Okay." Pat chewed thoughtfully. "So here's the thing about Sasquatch. Big creature. Lot of feelings. Probably never had anyone actually sit with him while he played, you know? Everyone always runs." Another crunch. "Actually that reminds me — there's a trail outside Bellingham, the Chuckanut Ridge loop, that has this one descent where you come out of the trees and the whole sound just opens up and it's like—" He made a sound that was not quite a word. "It's genuinely spiritual, man."</p>
+      <p>"Pat —"</p>
+      <p>"Right. Sasquatch. Okay so the saxophone. Wind instrument. Requires breath control, which means the one thing that throws off a saxophone player — any saxophone player, man or myth — is when someone plays along badly enough that they lose their own tempo. Not well. Badly. You get in there and you play so wrong, so confidently wrong, that he can't find his own note anymore." Pat scraped the bottom of the pot. "Do you have an instrument?"</p>
+      <p>Emerson looked at the balloon basket. Under the bench seat, held in place with a bungee cord, was his banjo. He had brought it without really thinking about it, the way you bring a good friend.</p>
+      <p>"Yeah," he said.</p>
+      <p>"Can you play it badly?"</p>
+      <p>Emerson considered this. He was, genuinely, a pretty good banjo player. But he had once, at a particularly chaotic open mic in Fort Collins, accidentally played an entire song in the wrong key and received a standing ovation from the one person in the audience who was also in the wrong key. He felt he could access that.</p>
+      <p>"Yeah," he said. "I think I can."</p>
+      <p>"Beautiful. Hey — do you think there are good mountain bike trails up there? Like, near where you're going?"</p>
+      <p>"Pat, I'm going into the woods to fight a Sasquatch."</p>
+      <p>"Sure, sure. But like, after."</p>
+      <p>Emerson landed the balloon in a clearing half a mile from where the music was strongest. The forest was cathedral-quiet except for the saxophone, which was getting louder and, he had to admit, more heartbreakingly lovely the closer he got. Willow walked beside him with the careful step of someone who respects the woods.</p>
+      <p>They found the Sasquatch in a small mossy clearing, seated on a boulder the size of a compact car, eyes closed, playing something that had no name but made Emerson think of fog and old photographs and the specific feeling of a place you'll never be able to return to. He was enormous. His fur was dark and damp. The saxophone was comically small in his hands and yet he played it with the tenderness of something very large being very gentle on purpose.</p>
+      <p>Emerson watched for a moment. He looked at Willow. She gave him a look that said: <em>I know. But we need the key.</em></p>
+      <p>He took out the banjo. He found the wrongest key he knew. He began to play.</p>
+      <p>The effect was immediate. The Sasquatch's left eye opened. Then the right. He played on, trying to hold the thread of the melody, but Emerson was in there now, confident and completely, committedly off, strumming with the full conviction of someone who believed deeply in what he was doing. The Sasquatch's brow furrowed. He tried a different register. Emerson followed him there, wrong in a new and creative way.</p>
+      <p>The saxophone lowered. The Sasquatch looked at Emerson with an expression of profound, exhausted defeat. He reached into his fur — Emerson chose not to think too hard about this — and produced a small brass key, shaped like a music note, tagged <em>2 of 7.</em> He held it out.</p>
+      <p>Emerson took it gently. "You play beautifully," he said, and meant it completely. "Like, genuinely. I'm sorry about the banjo."</p>
+      <p>The Sasquatch looked at him for a long moment. Then, slowly, he nodded. And lifted the saxophone again. And played something that might have been, in some other universe, a farewell.</p>
+      <p>Willow waited until they were back at the balloon before she said anything.</p>
+      <p>"That was sad," she said.</p>
+      <p>"Yeah," Emerson agreed quietly. "It kind of was."</p>
+      <p>He looked at the list. Next up: somewhere that had a cat meme problem. He pulled out his disintegrating phone. Another chunk of case fell off. He texted Trent.</p>
+    `,
+    cutaway: `
+      <p>They were out. Just like that. Delaney had given the wall panel one firm, teacher-steady push and the whole thing had swung open like it was embarrassed to have been a prison at all.</p>
+      <p>Buttercup rocketed out first, did two full laps of the corridor at top speed for no reason, then sat down and began cleaning her face as if none of that had happened.</p>
+      <p>"Okay, loves," Delaney said, looking both ways down the hallway with the calm assessment of someone who has managed a classroom fire drill many times. "I think there's a Starbucks about four blocks from here. We've earned a little treat."</p>
+      <p>Buttercup knocked a decorative vase off a nearby pedestal as they walked past. Just to see what would happen. It shattered.</p>
+      <p>"We're not going to do that," Delaney said pleasantly, not breaking stride.</p>
+    `
+  },
+  {
+    number: 'IV',
+    title: 'The Cat Meme Music Guy',
+    subtitle: 'In which Trent has some questions about the spare bedroom',
+    excerpt: 'Emerson touched down in a Walmart parking lot outside Portland. Trent was already there, leaning against a concrete barrier with a Taco Bell bag in one hand and a gin and soda in the other.',
+    content: `
+      <p>Emerson touched down in a Walmart parking lot outside Portland, which was not glamorous but was, as Willow pointed out, extremely flat and therefore ideal for landing a hot-air balloon. Trent was already there, leaning against a concrete barrier with a Taco Bell bag in one hand and a gin and soda in the other, wearing the expression of a man who has nowhere he urgently needs to be and has made peace with this.</p>
+      <p>"Emerson," Trent said, raising the gin slightly in greeting.</p>
+      <p>"Trent. You didn't have to come in person."</p>
+      <p>"I was in the area." He wasn't, particularly, but the specifics felt unnecessary. He looked at the balloon, then at Willow, then at the balloon again. "Hey, so — completely unrelated — how's the spare bedroom situation at your place these days?"</p>
+      <p>"Delaney's been kidnapped, Trent."</p>
+      <p>"Right, right. Terrible. So it's just you in the house then, for now, basically." He offered Emerson a Chalupa. Emerson took it. "I'm just saying, I've been looking at my living situation and it's like — you know how sometimes a chapter closes, you know?"</p>
+      <p>"What chapter closed?"</p>
+      <p>Trent took a long sip of gin. "My landlord raised the rent." He gazed into the middle distance. "Also I've been doing a lot of thinking about where to meet women. Like, quality women. Do you think there are good women at a cat meme music show?"</p>
+      <p>Willow turned to look at Trent with an expression of such sustained, patient neutrality that it bordered on a medical condition.</p>
+      <p>"That's actually where we're going," Emerson said. "The Cat Meme Music Guy. Small club, somewhere downtown. That's the next one on the list."</p>
+      <p>Trent perked up. "I'll come."</p>
+      <p>"Trent —"</p>
+      <p>"I'll be helpful. I know about this guy." He sat down on the concrete barrier, settled the Taco Bell bag in his lap, and adopted the posture of someone about to deliver a briefing. "So the Cat Meme Music Guy — his whole thing is he plays these songs that are just. Cat memes. Set to music. Keyboard Cat. Nyan Cat. The one that's just a cat going no no no no no. He loops them, layers them, and apparently it gets into your head so bad that people just stand there, completely hypnotized, nodding along for hours."</p>
+      <p>Willow had gone very still.</p>
+      <p>"His weakness," Trent continued, pulling a Baja Blast from somewhere in the bag, "is that the whole thing falls apart if someone in the audience doesn't recognize any of the songs. Like, the hypnosis only works if you know the memes. The music needs a host. Someone who's never been online enough to know what Keyboard Cat is — they're basically immune." He looked at Emerson. "You're going to be extremely vulnerable, just so you know."</p>
+      <p>"What about Willow?" Emerson asked.</p>
+      <p>They both looked at Willow. Willow was staring at a fixed point in the middle distance. Her tail was moving in a slow, rhythmic way it had not moved before.</p>
+      <p>"Willow," Emerson said carefully. "Have you seen these memes?"</p>
+      <p>A very long pause.</p>
+      <p>"I have complicated feelings about the representation," she said finally, "of cats in internet culture."</p>
+      <p>"She's compromised," Trent said.</p>
+      <p>"I am not compromised," Willow said, in a tone that did not fully close the door on compromised.</p>
+      <p>The club was called The Litter Box, which Emerson thought showed a certain commitment to the bit. It was the size of a large living room, with sticky floors and a ceiling so low that Trent had to duck, and it was absolutely packed. On the small stage, the Cat Meme Music Guy — a slight, intense man in a sweatshirt with a cat on it — hunched over a keyboard and a laptop, layering loops with the focused devotion of someone doing something they believe in completely.</p>
+      <p>Emerson felt it immediately. The opening bars of Keyboard Cat hit and something in his brain went soft and agreeable. He shook his head. Beside him, Willow had gone glassy-eyed in a way she would later describe as "a momentary aesthetic appreciation."</p>
+      <p>Trent, meanwhile, was scanning the crowd. "There are some very nice people here," he murmured, straightening up and smoothing his jacket. "I feel like people who come to cat meme music shows are probably low-drama, you know? Grounded. Salt of the earth."</p>
+      <p>"Trent," Emerson said, fighting the Nyan Cat loop that was currently colonizing his frontal lobe, "I need you to focus. You said someone who doesn't know the memes is immune. Do you know the memes?"</p>
+      <p>Trent thought about it. "Honestly I know like two of them. I'm pretty offline."</p>
+      <p>"Then you have to go unplug his laptop."</p>
+      <p>Trent looked at the stage. Looked at his Baja Blast. Looked back at the stage. "Yeah, okay," he said, with the easy compliance of a man who has no strong feelings about most things. He handed Emerson the drink, straightened up, and began making his way unhurriedly toward the stage, pausing once to introduce himself to someone near the front.</p>
+      <p>Emerson watched, Nyan Cat drilling deeper into his skull, Willow swaying slightly beside him in a way she was definitely not aware of. Trent reached the stage. He looked at the laptop. He looked at the power strip. He crouched down with the slow, considered energy of someone who is not in a rush, located the plug, and pulled it out with a gentle, decisive tug.</p>
+      <p>The music stopped.</p>
+      <p>The room blinked. Sixty people looked around with the stunned, slightly embarrassed expression of someone who has just woken up on public transport and doesn't know how long they've been asleep.</p>
+      <p>Willow sat down and began cleaning her ear with the focused dignity of someone who had not just been swaying.</p>
+      <p>The Cat Meme Music Guy stared at his dead laptop. Then at Trent. Trent gave him a small, apologetic shrug and handed him a Chalupa from somewhere, because Trent had thought to grab extra, because Trent was actually, in his own way, quite thoughtful. The key — brass, shaped like a tiny cat face, tagged <em>3 of 7</em> — slid off the keyboard and into Emerson's hand.</p>
+      <p>Outside, walking back to the balloon, Trent fell into step beside Emerson. "So I was thinking," he said. "If I did stay in the spare room, I would obviously pay rent. Some rent. A reasonable amount, to be determined. And I'd be very low-maintenance. I sleep a lot."</p>
+      <p>"Trent."</p>
+      <p>"I make good gin drinks."</p>
+      <p>"I'll talk to Delaney when I get her back."</p>
+      <p>Trent nodded, satisfied. That was, in his experience, essentially a yes. He held out the Baja Blast as a celebratory gesture. Emerson looked at it for a moment.</p>
+      <p>"You know I don't drink," Emerson said.</p>
+      <p>"I know."</p>
+      <p>A pause. Emerson looked back at the club, then at his crumbling phone, then at the horizon. "Hey, what's actually in non-alcoholic gin? Like what makes it taste like gin if there's no alcohol?"</p>
+      <p>Trent thought about it. "Juniper berries, mostly. Botanicals. Basically just fancy plant water."</p>
+      <p>Emerson considered this for a long moment. "I feel like I could get behind fancy plant water," he said finally. "Maybe when this is all over."</p>
+      <p>Trent nodded gravely. "That's growth, man."</p>
+      <p>Willow said nothing. But she did not disagree.</p>
+    `,
+    cutaway: `
+      <p>The Starbucks was warm and smelled like cinnamon and everything was fine. Delaney had ordered a venti oat milk latte with two pumps of vanilla and was sitting in an armchair by the window with the specific contentment of someone who has nowhere to be and no one to answer to for the first time in a while.</p>
+      <p>Buttercup was on the table. She had already knocked one straw off the edge to see what happened. She was considering the second straw.</p>
+      <p>"We don't knock things off tables," Delaney said, in the same gentle tone she used for everything, without looking up from her drink.</p>
+      <p>Buttercup knocked the second straw off the table.</p>
+      <p>"I said what I said," said Delaney pleasantly, and took a long sip of her latte.</p>
+    `
+  },
+  {
+    number: 'V',
+    title: 'The Fishtank Polka Band',
+    subtitle: 'In which Michael says something deeply strange with complete composure',
+    excerpt: 'The note said Chicago. Emerson spotted Michael from two hundred feet up, which was easy because Michael was on ice skates in a parking lot, executing slow, precise figure eights with the unhurried confidence of someone who does not require an audience.',
+    content: `
+      <p>The note said Chicago. Emerson wasn't sure why Chicago, but then he wasn't sure why any of this, so he pointed the balloon east and let the wind do most of the work. Somewhere over Wisconsin, Willow caught a thermal and rode it for forty minutes with her eyes closed and her ears back, which was the most relaxed Emerson had seen her since this whole thing started. He didn't interrupt. Some moments deserve to be left alone.</p>
+      <p>He spotted Michael from two hundred feet up, which was easy because Michael was on ice skates in a parking lot outside a venue called The Aquarium Room, executing slow, precise figure eights with the unhurried confidence of someone who does not require an audience. He was wearing a hockey jacket. He was not wearing a helmet. He looked up when the balloon's shadow passed over him and gave Emerson a single nod, as if hot-air balloons were a normal mode of arrival.</p>
+      <p>Emerson climbed out of the basket. "Michael. What do you know about a fishtank that plays polka?"</p>
+      <p>Michael completed his figure eight before answering. "My cousin had a fish once," he said, "that he was convinced could predict the weather. Turned out the fish was just dying. Those are two different things but they produce similar behavior in a fish." He glided to a stop. "The tank is in there. Sixty-gallon. The fish play polka. Nobody knows how. I've been thinking about it for three days and I've arrived at the conclusion that some questions aren't meant to be answered."</p>
+      <p>Emerson waited, because with Michael there was always more coming, it just arrived on its own schedule.</p>
+      <p>"Their weakness," Michael continued, executing a small backwards crossover for no apparent reason, "is that polka is fundamentally a participatory genre. It requires the audience to engage or it collapses. The fish feed off the energy of people who are doing the polka. No participation, no power." He paused. "I looked that up. Well. I inferred it. I looked up polka and then I inferred the fish part."</p>
+      <p>"So I just have to make sure nobody dances," Emerson said.</p>
+      <p>"You have to make sure nobody dances," Michael confirmed. He glided in a small circle. "How are you going to do that?"</p>
+      <p>"I'll figure it out."</p>
+      <p>"Okay." Another circle. "You know what's interesting about polka? It originated in Bohemia in the 1830s. The word might come from the Czech for 'half-step.' Or it might come from the Polish word for 'Polish woman.' Nobody agrees. I find that genuinely funny. A whole genre of music and nobody can agree on where the name came from." He said this the way you'd read a weather report. "Anyway. Good luck in there."</p>
+      <p>Willow watched him skate away. "Is he coming in?" she asked.</p>
+      <p>"I don't think Michael does venues," Emerson said.</p>
+      <p>The Aquarium Room was exactly what it sounded like. Every wall was floor-to-ceiling fish tanks, the blue-green light giving the whole place the feeling of being underwater, which was either very soothing or very unsettling depending on your disposition. In the center of the room, on a low stage, sat the tank. It was large. The fish inside it — a mixture of species that had no business being in the same tank together, and yet — were playing polka. A pair of angelfish handled what appeared to be a tiny accordion. A single enormous goldfish held down the tuba. Three neon tetras, working in tight formation, managed a surprisingly competent trumpet section.</p>
+      <p>Emerson had seen a lot in the past several days. He still stood in the doorway for a full thirty seconds just taking this in.</p>
+      <p>The crowd was already moving. Not dramatically — just that inevitable polka sway, the kind that starts in your hips before your brain has consented to it. Emerson could feel it pulling at him too, a kind of cheerful gravitational tug toward rhythmic movement. Willow planted her feet and set her jaw in the expression of someone actively resisting something.</p>
+      <p>"Okay," Emerson said quietly. He looked around the room. Near the bar, he spotted a Noah Kahan poster, torn in half, with a handwritten note taped below it that said: <em>they got to us first — sorry man, good luck. — N.K.</em> So Noah had been through here. Recently, by the look of it.</p>
+      <p>He looked at the crowd. He looked at the fish. He looked at the floor, which was a large square of open hardwood — exactly the kind of floor that polka wants you to use.</p>
+      <p>Then he had an idea. He pulled out his banjo.</p>
+      <p>Not to play badly this time. To play something so completely different, so aggressively un-polka, that it would create a counter-current in the room. He found the most melancholy, slow, minor-key Appalachian folk melody he knew — the kind of song that makes you feel like you're watching a sunset through a rain-streaked window — and he began to play it, loud and clear, right there in the doorway.</p>
+      <p>The effect was immediate and somewhat unexpected. People stopped swaying. Several people teared up. A man near the back sat down heavily on a barstool and stared into his drink. The polka energy in the room, which requires joy to function, hit the wall of pure wistful melancholy and simply dissolved.</p>
+      <p>The angelfish lost the accordion line. The goldfish's tuba note wandered off-key. The neon tetras looked at each other.</p>
+      <p>The music sputtered. Stopped.</p>
+      <p>In the silence, the fourth key dropped from somewhere inside the tank and clinked against the glass until a staff member — looking dazed, as if they'd just remembered where they worked — fished it out with a net and handed it to Emerson without making eye contact. The tag read <em>4 of 7.</em> It was shaped like a tiny fish. Of course it was.</p>
+      <p>Outside, Michael was still in the parking lot, doing backwards crossovers in the dark.</p>
+      <p>"How'd it go," he said. Not a question particularly. More of an acknowledgment that something had occurred.</p>
+      <p>"I made a room full of people cry with a banjo," Emerson said.</p>
+      <p>Michael nodded slowly. "That's one way to live," he said. He skated a small circle. "My cousin's fish died in February, by the way. Turned out it had been predicting rain the whole time. Hundred percent accuracy. We just didn't realize until it was too late."</p>
+      <p>He skated off into the dark. Emerson watched him go.</p>
+      <p>"I genuinely can never tell," Emerson said, "if that's a metaphor."</p>
+      <p>"It's not," said Willow. "That's just Michael."</p>
+    `,
+    cutaway: `
+      <p>The spa had given them complimentary robes to take home, which Delaney had accepted with genuine appreciation and folded neatly into her tote bag next to Buttercup, who had been asleep for the last forty minutes and was making small sounds that might have been purring or might have been plotting. It was genuinely hard to tell with Buttercup.</p>
+      <p>They were now at a very nice restaurant two blocks from the spa because Delaney had walked past it and the menu in the window had said "seasonal tasting menu" and she had thought, well, yes, obviously.</p>
+      <p>The waiter had not yet noticed Buttercup under the table. Buttercup had noticed the waiter's shoelaces. This was about to become a situation.</p>
+      <p>"We're going to be very good," Delaney murmured, mostly to herself, studying the menu with genuine excitement. "We're going to be absolute angels."</p>
+      <p>Under the table, a shoelace was tugged.</p>
+      <p>The waiter looked down.</p>
+      <p>"She's very friendly," Delaney said warmly, without looking up. "Can I start with the lentil dish?"</p>
+    `
+  },
+  {
+    number: 'VI',
+    title: 'The Rollerblader',
+    subtitle: 'In which Peter has concerns about the genre classification',
+    excerpt: 'Peter was waiting on a boardwalk in Miami with his phone out, headphones around his neck, radiating the energy of someone who has been here for two hours and has strong opinions about it. He had a grey and white cat named Xie with him.',
+    content: `
+      <p>The list said Miami. Emerson had never been to Miami. He had always imagined it as a place where everything was slightly too bright and everyone was slightly too confident, and as the balloon descended through a cloudless sky toward a city that was exactly that, he felt a complicated mixture of overwhelm and genuine delight, because Emerson was constitutionally incapable of arriving somewhere new without being excited about it.</p>
+      <p>Willow put on her most composed expression, which was saying something, because all of Willow's expressions were composed.</p>
+      <p>Peter was waiting for them on a boardwalk, sitting on a bench with his phone out, headphones around his neck, radiating the particular energy of someone who has been here for two hours and has strong opinions about it. He had a cat with him — a grey and white cat named Xie who was sitting beside him on the bench with the comfortable authority of a cat who goes everywhere her person goes and sees no reason to apologize for it.</p>
+      <p>Willow saw Xie. Xie saw Willow. A long, complex moment of cat diplomacy occurred without either human fully understanding what was negotiated.</p>
+      <p>"Emerson," Peter said, standing up. "Okay so I've been looking into this Rollerblader guy and I have to be honest with you I am struggling to care about this musically because it's not techno."</p>
+      <p>"It's the Brink soundtrack," Emerson said. "On cassette."</p>
+      <p>"Right, and look, I respect the commitment to a bit, I do, but from a pure sonic architecture standpoint—" Peter stopped himself. Recalibrated. "Okay. Okay. Here's the thing. The Rollerblader — he's fast. Like, concerningly fast. Inline skates, full pads, the whole thing, and he just goes. The music plays, he skates, and anyone who tries to stop him just gets absolutely left behind because nobody can keep up."</p>
+      <p>"So how do I stop someone I can't catch?"</p>
+      <p>"You don't catch him," Peter said. "You think about what a rollerblader's entire identity depends on." He looked at Emerson meaningfully. "The surface, man. Rollerblades need a smooth surface. You get him onto grass, gravel, sand, anything uneven, and he's just a guy in very uncomfortable boots." He picked up Xie and held her against his chest in the unconscious way cat people do. "Also I genuinely think you should consider, once this is all over, getting into techno. I think it would be good for you. It's very freeing."</p>
+      <p>"I'll think about it," Emerson said, which was true because Emerson genuinely considered every suggestion anyone made to him.</p>
+      <p>"Xie wants to come," Peter said.</p>
+      <p>Willow, from the balloon basket, made a sound that was not quite a word.</p>
+      <p>"Xie doesn't have a saddle," Emerson said carefully.</p>
+      <p>Peter looked at Xie. Xie looked back at him with the calm of a cat who has never needed a saddle and doesn't intend to start. "She doesn't need a saddle," Peter said. "She's very independent."</p>
+      <p>"It's a safety thing," Emerson said.</p>
+      <p>Peter sighed the sigh of a man who has been told no on Xie's behalf before. "Fine. But when you find the Rollerblader, just think about the surface. That's all I'm saying."</p>
+      <p>The Rollerblader was not hard to find. You could hear him before you could see him — the thin, tinny wail of a cassette player carried through the warm Miami air, the Brink soundtrack blasting with the lo-fi intensity of something that was never meant to be listened to outside of a PlayStation, and yet here it was, absolutely full of itself, echoing off the boardwalk and the buildings and the small taco stands that lined the waterfront.</p>
+      <p>Then the Rollerblader himself came around the corner and Emerson understood the problem immediately. He was moving at a speed that did not seem compatible with the human body. Full kneepads, elbow pads, a helmet with a flame decal, neon windbreaker, cassette player clipped to his belt, and an expression of pure, focused joy. He was not threatening anyone, exactly. He was simply completely unstoppable, weaving through the crowds at boardwalk speed, and anyone who got close enough to talk to him was immediately and cheerfully left behind.</p>
+      <p>Emerson had encountered the Infinite String Dusters on his way into Miami — or rather, he had found them sitting in a circle in a park, profoundly lost, deeply relaxed about being lost, and eating sandwiches. They had looked up when Emerson landed nearby and one of them had said, "Hey, you heading toward the water?" and when Emerson said yes, another one had pressed a small bag of beach sand into his hand and said, "you're gonna want this, man," with the serene confidence of people who have been places and seen things and don't feel the need to explain further.</p>
+      <p>He looked at the sand now. He looked at the Rollerblader. He looked at the long, smooth, perfect boardwalk that was this guy's entire kingdom.</p>
+      <p>He waited. The Rollerblader looped around — he had a circuit, Emerson realized, the same stretch of boardwalk over and over, joyfully, indefinitely. Emerson timed it. As the Rollerblader came past again, cassette blaring, Emerson emptied the bag of sand in a wide arc directly across the path.</p>
+      <p>The Rollerblader hit it at full speed.</p>
+      <p>What happened next was not a crash so much as a very sudden, very complete loss of the entire concept of momentum. One moment he was flying. The next he was standing completely still in the middle of a sand patch, arms out, blinking, the Brink soundtrack still playing from his belt in the sudden silence like a very small, very committed orchestra that hadn't gotten the news.</p>
+      <p>He looked down at his wheels. He looked at the sand. He looked at Emerson.</p>
+      <p>He reached down and clicked off the cassette player.</p>
+      <p>The fifth key was tucked into his knee pad. He pulled it out and held it across to Emerson with the dignified solemnity of a man who has been bested fairly and knows it. It was shaped like a tiny rollerblade. The tag read <em>5 of 7.</em></p>
+      <p>"Sick move," the Rollerblader said quietly.</p>
+      <p>"Thank you," Emerson said. "I really respect what you do."</p>
+      <p>The Rollerblader nodded. He looked at his wheels. He looked at the long, clear boardwalk beyond the sand. "You got any more of that sand?"</p>
+      <p>"No."</p>
+      <p>"Okay." He clicked the cassette player back on. Found his footing. And was gone.</p>
+      <p>Emerson called Peter on the walk back to the balloon. Another chunk of phone case crumbled off as he dialed. He was down to about sixty percent of a phone case at this point.</p>
+      <p>"Got him," Emerson said.</p>
+      <p>"The sand thing?"</p>
+      <p>"The sand thing."</p>
+      <p>"Beautiful." A pause. "Hey, I found a techno playlist I want to send you. It's very approachable. There's one track that I think honestly has some structural similarities to Turnpike Troubadours if you really listen to the —"</p>
+      <p>"Goodbye, Peter."</p>
+      <p>"Just one track —"</p>
+      <p>He hung up. Willow was waiting in the basket, tail moving once. She had watched the whole thing from above with the satisfaction of someone whose advice, had it been sought, would have been essentially identical.</p>
+      <p>"Two more," Emerson said, climbing in.</p>
+      <p>Willow looked at the list. Then at the horizon. Her tail moved once more, slower this time. They both knew the next one was going to be different. The Frogs on Skis were waiting somewhere cold, and after that — just Zach Bryan and his hiccups, and then Brandywine.</p>
+      <p>He adjusted the burner. The balloon rose. Below them, very faintly, they could still hear the Brink soundtrack disappearing into the Miami night.</p>
+    `,
+    cutaway: `
+      <p>The spa had given them complimentary robes to take home, which Delaney had accepted with genuine appreciation and folded neatly into her tote bag next to Buttercup, who had been asleep for the last forty minutes and was making small sounds that might have been purring or might have been plotting. It was genuinely hard to tell with Buttercup.</p>
+      <p>They were now at a very nice restaurant two blocks from the spa because Delaney had walked past it and the menu in the window had said "seasonal tasting menu" and she had thought, well, yes, obviously.</p>
+      <p>The waiter had not yet noticed Buttercup under the table. Buttercup had noticed the waiter's shoelaces. This was about to become a situation.</p>
+      <p>"We're going to be very good," Delaney murmured, mostly to herself, studying the menu with genuine excitement. "We're going to be absolute angels."</p>
+      <p>Under the table, a shoelace was tugged.</p>
+      <p>The waiter looked down.</p>
+      <p>"She's very friendly," Delaney said warmly, without looking up. "Can I start with the lentil dish?"</p>
+    `
+  },
+  {
+    number: 'VII',
+    title: 'The Frogs on Skis',
+    subtitle: 'In which Colton asks a very good question, and MGK asks a better one',
+    excerpt: 'Vail appeared below them like a postcard that had always existed and was simply waiting for Emerson to arrive. Colton was there at the base of the mountain, hands in his pockets, looking at the mountains with the expression of someone who has arrived somewhere interesting.',
+    content: `
+      <p>Vail appeared below them like a postcard that had always existed and was simply waiting for Emerson to arrive. The mountains were enormous and white and completely indifferent to his problems, which he found oddly comforting. Willow stood at the prow of the basket with her nose into the cold alpine air and her eyes half-closed, which was as close to bliss as she publicly allowed herself.</p>
+      <p>They landed in a snow-dusted meadow at the base of the mountain. The balloon settled with a soft crunch. Emerson climbed out and immediately sank to his knees in snow, which was not ideal but was also, he had to admit, very beautiful.</p>
+      <p>Colton was there. He was always going to be there — that was the kind of person Colton was. He was standing at the edge of the meadow in a heavy coat, hands in his pockets, looking at the mountains with the expression of someone who has been thinking for a long time and has arrived somewhere interesting. Beside him, sitting in the snow with the patient dignity of a dog who has been to many places and found them all acceptable, was Scout.</p>
+      <p>Scout saw Willow. His tail began moving at a speed that suggested his entire body might lift off the ground.</p>
+      <p>Willow looked at Scout. She looked at Emerson. Her expression said: <em>we have been over this.</em></p>
+      <p>"Colton," Emerson said.</p>
+      <p>"Emerson." Colton looked at him for a long moment. "Can I ask you something before we get into it?"</p>
+      <p>"Sure."</p>
+      <p>"When you think about what you're doing — really think about it — is this about Delaney? Or is this about proving something to Brandywine?"</p>
+      <p>Emerson opened his mouth. Closed it. The mountains were very quiet.</p>
+      <p>"Because," Colton continued, "I think there's a version of this where you defeat every single one of these things and arrive at the end still carrying something you were supposed to put down a long time ago. And I'm not sure a banjo and a hot-air balloon can get you there." He paused. "I've been reading a lot of Kierkegaard."</p>
+      <p>"I quit that band because they were genuinely really annoying," Emerson said.</p>
+      <p>"Were they? Or were you afraid of what it meant to stay?"</p>
+      <p>A long silence. Snow fell softly. Scout whined once, very quietly, and then thought better of it.</p>
+      <p>"They made me play the banjo during a fourteen-minute drum solo," Emerson said. "Every single show. For eight months."</p>
+      <p>Colton considered this carefully. "Okay," he said. "Yeah. They sound annoying." He pulled his hands from his pockets. "Scout wants to help, by the way."</p>
+      <p>"Scout doesn't have a saddle."</p>
+      <p>"Scout doesn't need —"</p>
+      <p>"It's a safety thing, Colton."</p>
+      <p>Colton looked at Scout. Scout looked at Willow with the full, unguarded hope of a creature who has not yet learned to protect itself from disappointment. Willow looked away with the careful diplomacy of someone who feels something but has a policy about it.</p>
+      <p>"The frogs," Colton said finally, accepting this. "They're up on the mountain. Blue run, just past the main lift. They come down in formation, singing ribbit a cappella in four-part harmony, and when they get to the bottom they jump — all of them, simultaneously — and the concussive force of that many frogs landing at once knocks everyone nearby off their feet." He tilted his head. "It's actually extraordinary, musically. The harmony is genuinely moving. That's what makes it dangerous. You're so caught up in the beauty of it that you don't brace for the landing."</p>
+      <p>"So how do I stop the jump?"</p>
+      <p>"You need someone who can absorb the impact. Channel it. Turn it into something instead of just taking it." He looked at Emerson steadily. "You need to already be in the air when they land."</p>
+      <p>Emerson stared at him. "How am I supposed to —"</p>
+      <p>That was when MGK came off the ski lift.</p>
+      <p>He was not someone Emerson had expected to find in Vail, and yet here he was, skis over one shoulder, goggles pushed up on his forehead, moving through the snow with the long easy stride of someone who has decided that every situation is his situation. He spotted Emerson and pointed at him immediately.</p>
+      <p>"You're the balloon guy," MGK said. "I heard about you in Miami. The sand thing was clean."</p>
+      <p>"Thanks," Emerson said. "I —"</p>
+      <p>"I know about the frogs." He dropped his skis in the snow. "I've been watching them for two days. You can't stop the jump. But you can meet it." He looked Emerson up and down with the assessing eye of someone who has spent a lot of time thinking about how bodies move through space. "You ever done a slam?"</p>
+      <p>"A what?"</p>
+      <p>"A slam. You jump, you come down hard, both feet, all your weight, you meet the ground before the shockwave does. Absorbs it. Redirects it." He paused. "Actually, given who you are, we should call it something else." He thought about it for approximately one second. "The EmerSLAMM. Two M's."</p>
+      <p>"Why two M's?"</p>
+      <p>"Hits harder," MGK said, as if this were obvious.</p>
+      <p>He spent the next forty minutes teaching Emerson the EmerSLAMM in the snow at the base of the mountain, which mostly involved Emerson jumping off progressively larger rocks and landing with his full weight and commitment while MGK watched and occasionally said things like "more intention" and "you're still apologizing with your knees, stop apologizing." Willow observed from a safe distance. Colton sat on a log and read. Scout watched Emerson with devoted attention and attempted the EmerSLAMM himself twice, both times spectacularly.</p>
+      <p>By the time they rode the lift up to the blue run, Emerson felt something he hadn't quite felt since this whole adventure started. Not just determined. Ready.</p>
+      <p>The frogs were already at the top when they arrived — twelve of them, in a neat formation, tiny skis strapped to their feet, goggles on, looking down the mountain with the focused calm of athletes. Then, without announcement, they pushed off.</p>
+      <p>They came down in a perfect V formation, and they sang as they skied, a ribbit a cappella that rose and swelled through the cold mountain air in four-part harmony, so startlingly beautiful that Emerson felt his chest tighten with something that was not entirely unrelated to the feeling he got from very good banjo music. Willow, riding in the backpack on his chest, went completely still.</p>
+      <p>"Don't let it get you," she said quietly, but her voice was not entirely steady.</p>
+      <p>The frogs hit the bottom. They gathered. They coiled.</p>
+      <p>They jumped.</p>
+      <p>Emerson jumped first.</p>
+      <p>The EmerSLAMM — both feet, full weight, all intention, no apology from the knees — hit the snow a half-second before the frogs landed, and the shockwave that rolled out from their impact met the shockwave from his and the two forces cancelled each other out in a puff of displaced snow that rose around him like a small, personal blizzard and then settled.</p>
+      <p>Silence.</p>
+      <p>The frogs looked at him from where they had landed. The lead frog — slightly larger, slightly more goggled than the others — reached into its tiny ski jacket and produced the sixth key. Shaped like a frog. Tagged <em>6 of 7.</em> It held it out with a small webbed hand.</p>
+      <p>Emerson took it gently. "That harmony was incredible," he said.</p>
+      <p>The lead frog blinked once. Then, very softly, they began to sing again — something slower this time, just for a moment, just a few bars — and it was even more beautiful without the jump at the end of it, and everyone on the mountain who heard it stopped what they were doing and stood very still.</p>
+      <p>MGK, watching from the lift line, nodded once. "That's it," he said to no one in particular. "That's the thing right there."</p>
+      <p>On the ride back down, Colton fell into step beside Emerson. "So," he said. "Was it about Delaney or Brandywine?"</p>
+      <p>Emerson thought about it honestly, the way Colton's questions always made you do. "Both," he said. "But mostly Delaney."</p>
+      <p>Colton nodded. "That's the right answer," he said. "Kierkegaard would agree, actually. There's a whole passage —"</p>
+      <p>"One more to go, Colton."</p>
+      <p>"Right." He smiled. "Go get her back."</p>
+    `,
+    cutaway: `
+      <p>They had checked into a hotel. A very nice one. Delaney had called ahead — she had found a phone in the third building they'd walked through after escaping, helped herself to it with the calm pragmatism of a woman handling a situation, and booked two nights because frankly they had earned it.</p>
+      <p>The room had a bathtub. Delaney was in it. There were bubbles. There was a book. There was a small glass of sparkling water with a lemon slice on the edge of the tub because the hotel had a thing about that and Delaney saw no reason to argue.</p>
+      <p>Buttercup was on the bathroom counter. She had knocked the complimentary shampoo into the sink. Then the conditioner. She was now examining the tiny lotion bottle with the specific intensity of something that has decided this one is next.</p>
+      <p>"Buttercup," Delaney said, turning a page.</p>
+      <p>The lotion hit the sink.</p>
+      <p>"I love you so much," Delaney said warmly, and turned another page.</p>
+    `
+  },
+  {
+    number: 'VIII',
+    title: 'Zach Bryan, Behind Bars, With Hiccups',
+    subtitle: 'In which there is no advisor, and Emerson figures it out anyway',
+    excerpt: 'There was no name on the list for this one. Just coordinates pointing to a small county somewhere in rural Oklahoma. Zach Bryan was sitting on a cot with a guitar across his lap, looking like a Renaissance painting of someone having a very bad week.',
+    content: `
+      <p>There was no name on the list for this one. Just coordinates. Emerson had plugged them into his phone — what remained of his phone, which at this point was essentially a screen held together by memory and stubbornness, the case reduced to a thin crust of its former self that crumbled a little more every time he touched it — and the coordinates pointed to a small county somewhere in rural Oklahoma, which felt right in a way that was hard to explain.</p>
+      <p>He flew through the night. Willow slept in her usual spot near the burner, curled into a shape that looked structurally impossible but was apparently very comfortable. Emerson watched the dark plains roll by below and thought about what Colton had said and what he hadn't said and what lay on the other side of this last key.</p>
+      <p>He thought about calling someone. Nate, maybe, or Pat. But the list had been clear — seven advisors, one per boss — and he had used them all. This one was his.</p>
+      <p>The jail was small and county and had a hand-painted sign out front that said COUNTY LOCKUP which Emerson appreciated for its commitment to clarity. He landed in the dirt parking lot at dawn. A deputy was sitting on the front steps drinking coffee and did not appear remotely surprised to see a hot-air balloon land in the parking lot, which said something about what kind of week it had been around here.</p>
+      <p>"You here about the singer?" the deputy said.</p>
+      <p>"Yes sir," Emerson said.</p>
+      <p>"Cell three." She jerked her thumb over her shoulder. "Fair warning — he's got the hiccups something terrible. Been going since Tuesday."</p>
+      <p>Emerson found cell three at the end of a short hallway. Zach Bryan was sitting on a cot with a guitar across his lap, looking like a Renaissance painting of someone having a very bad week. He was unshaven. He was tired. He was, without question, the most dangerous thing Emerson had encountered on this entire journey, and he wasn't even trying. He was just sitting there behind bars, radiating a kind of raw, unfiltered emotional gravity that made the air in the hallway feel heavier.</p>
+      <p>He looked up when Emerson arrived. Then he hiccupped.</p>
+      <p>It was not a small hiccup. It was the kind of hiccup that seems to originate somewhere around the solar plexus and travel upward through a person's entire biography before escaping. It shook the guitar strings. It rattled the cell door slightly. Willow, in her backpack on Emerson's chest, pressed herself a little flatter.</p>
+      <p>"You're the one working through the list," Zach Bryan said. His voice was exactly what you'd expect. Emerson felt his resolve wobble slightly just from the speaking voice, before any singing had even occurred.</p>
+      <p>"Yes," Emerson said.</p>
+      <p>"I know why you're here." He looked down at the guitar. "I'm not going to make it easy."</p>
+      <p>"I know."</p>
+      <p>Another hiccup. The fluorescent light above flickered.</p>
+      <p>"The thing is," Zach Bryan said, "I don't particularly want to be doing this either. It's not comfortable, being behind bars with the hiccups, playing music at people until they emotionally collapse." He strummed once, absently, and the single chord it produced was so unreasonably affecting that a deputy two rooms over put down her crossword puzzle and stared at the wall for a moment. "But here we are."</p>
+      <p>"Here we are," Emerson agreed.</p>
+      <p>A pause. Then Zach Bryan began to play.</p>
+      <p>It was, objectively, extraordinary. Even through the bars. Even with the hiccups interrupting every third line, which should have broken the spell but somehow — impossibly, unfairly — made it more affecting, like the hiccups were just another instrument, like vulnerability was the whole point. Emerson felt it moving through him the way good music always moved through him, except more so, except with weight behind it, except aimed directly at every soft place he'd been trying to keep protected since this whole thing started.</p>
+      <p>He thought about Delaney. The specific way she said things were going to be okay, in that classroom voice, and how it always worked on him even when he knew she was using the classroom voice.</p>
+      <p>He thought about Willow, who had been with him every mile of this without complaint, without drama, just steady and present and occasionally right about the phone case.</p>
+      <p>He felt his eyes go hot. He didn't blink.</p>
+      <p>And then — quietly, without thinking about it too hard — he reached around and unzipped the backpack and took out the banjo.</p>
+      <p>He didn't play against it this time. He didn't play badly or strategically or with any plan at all. He just played alongside it, found the key Zach Bryan was in and sat down inside it, and played the most honest thing he knew how to play, which was a simple rolling melody his grandfather had taught him when he was nine years old and which he had never played for anyone because it felt too private.</p>
+      <p>Zach Bryan stopped singing. He kept playing, but he stopped singing, and he looked at Emerson through the bars with an expression that was complicated and real.</p>
+      <p>They played together for a while. Just the two of them, in a county jail hallway in rural Oklahoma at dawn, the deputy two rooms over having fully abandoned the crossword. Willow sat on Emerson's shoulder and said nothing, which was the most respectful thing she could have done.</p>
+      <p>Eventually Zach Bryan hiccupped one final, seismic time, and something seemed to break loose in him. He reached through the bars and set the seventh key in Emerson's palm. It was shaped like a guitar. The tag read <em>7 of 7.</em></p>
+      <p>"That was a good melody," Zach Bryan said. "The one at the end."</p>
+      <p>"My grandfather's," Emerson said.</p>
+      <p>"You should play it for people."</p>
+      <p>"Maybe," Emerson said. And then, because he meant it: "You doing okay in here?"</p>
+      <p>Zach Bryan looked around the cell. Hiccupped once more, smaller this time. "I've been in worse situations," he said. "Emotionally."</p>
+      <p>Emerson nodded. He held up the seven keys. They caught the fluorescent light. Seven small brass shapes, each one a little absurd, collectively representing the strangest ten days of his life.</p>
+      <p>"One more," Willow said quietly, from his shoulder.</p>
+      <p>"One more," Emerson agreed.</p>
+      <p>He walked back out into the Oklahoma dawn, climbed into the balloon, and pointed it toward wherever Brandywine and the Mighty Fines were waiting. The burner roared. They rose. Below them the county jail got small and then smaller and then disappeared into the plains.</p>
+      <p>He didn't call anyone. He didn't need to. He knew exactly what he was going to do.</p>
+    `,
+    cutaway: `
+      <p>The hotel had a rooftop terrace. Delaney had found it that morning, and it was exactly the kind of thing she would have found because Delaney had a gift for locating the best version of whatever situation she was in.</p>
+      <p>She was sitting in a lounge chair with her second coffee of the morning, watching the city wake up, completely at peace. Buttercup was on the chair beside her, doing that thing where she aggressively kneaded a throw pillow for several minutes and then fell instantly asleep on top of it, like she had defeated it.</p>
+      <p>Delaney's phone — her actual phone, which she had retrieved from her bag the moment they'd escaped because of course she had — buzzed. A text from her sister: <em>haven't heard from you in a few days, everything okay??</em></p>
+      <p>Delaney looked at the city. Looked at Buttercup. Took a sip of coffee.</p>
+      <p>She typed back: <em>totally fine! just on a little adventure :) home soon</em></p>
+      <p>She put the phone down and watched the sunrise finish what it had started.</p>
+    `
+  },
+  {
+    number: 'IX',
+    title: 'The Mighty Fines, and the End of It',
+    subtitle: 'In which Emerson comes home, puts down the banjo, and picks up something better',
+    excerpt: 'After everything — after Memphis and the Pacific Northwest and Portland and Chicago and Miami and Vail and a county jail in Oklahoma — the final destination was Denver. Colfax Avenue. A bar he had driven past a hundred times without stopping.',
+    content: `
+      <div class="reader-part-header">Part One — The Darkest Hour</div>
+      <p>He flew home.</p>
+      <p>That was the strange part — after everything, after Memphis and the Pacific Northwest and Portland and Chicago and Miami and Vail and a county jail in Oklahoma, the final destination was Denver. Colfax Avenue. A bar he had driven past a hundred times without stopping. The balloon drifted over the Front Range as the sun set behind the mountains and turned everything amber and pink, and Emerson felt the specific weight of almost-done, which is its own particular kind of heavy.</p>
+      <p>He landed on a side street off Colfax at dusk, which drew exactly the level of attention you'd expect on Colfax, which was essentially none. A man walking a ferret glanced up and then returned to his phone. A woman eating a burrito on a stoop gave the balloon a single nod of acknowledgment and continued eating. This was Colfax. It had seen things.</p>
+      <p>The Lion's Lair was half a block down. Even from outside, it looked like a bar that had made a decision about itself a long time ago and was completely at peace with that decision. Neon signs in the window. A hand-lettered chalkboard out front that said TONIGHT: BRANDYWINE AND THE MIGHTY FINES — TRIUMPHANT RETURN. The word triumphant had been spelled wrong and then corrected and then spelled wrong again in the correction.</p>
+      <p>Emerson stood on the sidewalk and looked at it for a moment. Willow sat on his shoulder.</p>
+      <p>"You ready?" she said.</p>
+      <p>"Almost," he said. He reached into the balloon basket and set down the banjo. It had served him well — the Sasquatch, Zach Bryan's hallway, the long miles in between. He loved it the way you love something that has been with you through hard things. But this was different. This was Brandywine.</p>
+      <p>From the very bottom of the basket, wrapped in an old flannel shirt, he lifted out the Dobro. It was resonator steel and it caught the last of the evening light and threw it back in a warm, round gleam. He had not played it in two years. The last time he had played it had been at a Brandywine rehearsal, actually, when he had briefly convinced the band to try something that wasn't completely terrible, and Josh had said it was too show-offy and Brandy had said it was actually good but then reversed her position when Josh made a face, and that had been more or less the beginning of the end.</p>
+      <p>He tuned it standing on the Colfax sidewalk. A couple walking by slowed down to listen to the tuning, which told him everything he needed to know about the Dobro.</p>
+      <p>"Okay," he said. "Now I'm ready."</p>
+      <div class="reader-part-header">Part Two — The Mighty Fines</div>
+      <p>The Lion's Lair smelled like every dive bar that had ever existed distilled into one concentrated essence: stale beer, old wood, decades of loud music absorbed into the walls and slowly releasing back into the air. It was, in its own way, a historic institution. Emerson had always respected it. He just hadn't expected to be here for this.</p>
+      <p>The band was setting up when he walked in. There were four of them total — a drummer who looked like he'd rather be somewhere else, a bass player who appeared to be asleep standing up, and then Josh and Brandy, who were in the middle of an argument that had clearly been going on for some time and showed no signs of finding a natural conclusion.</p>
+      <p>"I'm just saying the monitor mix is wrong," Josh was saying. He was tall, with the energy of someone who had strong opinions about everything and had never once considered that this might be exhausting for others.</p>
+      <p>"The monitor mix is fine," Brandy said. She was behind the keyboard, not looking at him, adjusting something that didn't need adjusting. "The monitor mix has always been fine. The monitor mix was fine at soundcheck, it was fine at the last show, it was fine at every show we've ever played."</p>
+      <p>"That's literally not true —"</p>
+      <p>"It's literally completely true —"</p>
+      <p>"You just don't want to admit —"</p>
+      <p>They both noticed Emerson at the same time.</p>
+      <p>A silence fell over the Lion's Lair that was different from the previous silence. The drummer who'd rather be somewhere else looked up. The standing-asleep bass player opened one eye.</p>
+      <p>"Emerson," Josh said. His voice had gone careful in a way that suggested he had prepared for this moment and was now discovering that preparation and readiness are not the same thing.</p>
+      <p>"Hey, Josh," Emerson said. "Hey, Brandy."</p>
+      <p>"Hey, Emerson," Brandy said. She had the grace to look slightly embarrassed. Josh did not have this grace.</p>
+      <p>"You have something of mine," Emerson said. "Two things, actually. Three if you count Buttercup."</p>
+      <p>"We have a show tonight," Josh said, squaring up in the way of someone who knows they're wrong but has decided to be large about it anyway. "You want Delaney back, you go through the music. That's how this works. That's always been how this works."</p>
+      <p>"You kidnapped my wife," Emerson said, with the calm of someone who has crossed seven states and defeated seven meme band bosses and played his grandfather's melody in a county jail in Oklahoma and is completely, utterly out of patience for nonsense, "because I quit your band."</p>
+      <p>"You left us," Josh said. "Right before the Ogden show."</p>
+      <p>"You made me play banjo through a fourteen-minute drum solo. Every show. For eight months."</p>
+      <p>"It was artistic —"</p>
+      <p>"Josh," Brandy said quietly.</p>
+      <p>"— vision, and you never respected —"</p>
+      <p>"Josh," Brandy said again, and something in her voice made him stop. She looked at Emerson. "You want to play for her?"</p>
+      <p>"Yes," Emerson said.</p>
+      <p>She looked at Josh. Josh looked at the ceiling. The ceiling offered nothing. "Fine," he said.</p>
+      <p>The bar had filled up without Emerson noticing — word traveled fast on Colfax apparently, or maybe these things simply drew a crowd by gravity. Nate was there, he realized, slapping his bass softly in the back corner for no reason other than that he couldn't help it. Trent was there with a gin, leaning against the wall, looking genuinely interested for the first time all week. Michael was there in his hockey jacket, standing near the door with an unreadable expression that might have been anticipation. Peter had driven up from somewhere and was already filming on his phone. Pat had arrived directly from a trail ride and was eating mac and cheese from a container, still in his helmet.</p>
+      <p>Colton was there. He caught Emerson's eye and gave him the smallest nod. Scout, somehow, was also there, sitting very properly beside Colton's feet, tail sweeping the floor once.</p>
+      <p>Willow climbed down from Emerson's shoulder and sat at the edge of the small stage with perfect posture, facing the room, like a judge.</p>
+      <p>Emerson stepped up. He looked at the Dobro in his hands. He thought about the Sasquatch in the rain, playing something with no name. He thought about the frogs and their impossible harmony. He thought about Zach Bryan's hiccup shaking the guitar strings, and his grandfather's melody, and Delaney's voice saying <em>we're okay, we're doing great, this is a fun little adventure.</em></p>
+      <p>He played.</p>
+      <p>The Dobro filled the Lion's Lair the way resonator steel fills a room — not by getting louder but by getting rounder, warmer, deeper, until the sound wasn't coming from the stage anymore, it was coming from the walls, from the floor, from somewhere inside everyone listening. He played the rolling melody his grandfather had taught him, but fuller now, richer, with everything the last ten days had put into him. He played it for Delaney. He played it for Willow. He played it, honestly, a little bit for the Sasquatch, who deserved to know that someone had been listening.</p>
+      <p>Josh lasted about forty-five seconds before his expression changed.</p>
+      <p>Brandy lasted about twenty.</p>
+      <p>By the time Emerson hit the second verse, Brandy had quietly stopped pretending to adjust things and was just standing behind her keyboard with her arms at her sides, listening with her whole face. The drummer who'd rather be somewhere else had forgotten he'd rather be somewhere else. The bass player was fully awake.</p>
+      <p>Josh sat down on an amp. This was, Emerson knew, the most significant thing that had happened all night. Josh did not sit down. Josh stood and had opinions. Josh sitting down on an amp and just listening was the Dobro doing what the Dobro does to people who have been fighting it their whole lives.</p>
+      <p>Emerson let the last note ring until it was gone.</p>
+      <p>The Lion's Lair was quiet for a moment in the good way.</p>
+      <p>Then Nate started slapping the bass in appreciation, which broke the spell in exactly the right way, and the bar erupted, and Josh stood up from the amp and opened his mouth and closed it and then said, grudgingly, the way a man says the truest thing he knows: "You were always the best one in the band."</p>
+      <p>"That's not true," Emerson said.</p>
+      <p>"It is," Brandy said. "It was always true. We just didn't say it." She reached under the keyboard and produced a brass key — heavier than the others, larger, shaped like a music note with a small crown on it. "She's at the Starbucks on 16th Street," she said. "Has been for a while, I think, if I'm being honest."</p>
+      <p>"Since the second day," Josh admitted, quietly, to the floor.</p>
+      <div class="reader-part-header">Part Three — The Starbucks</div>
+      <p>The Starbucks on 16th Street was warm and well-lit and smelled like coffee and cinnamon and the specific comfort of a place that is always open. Emerson pushed through the door with Willow on his shoulder and seven keys in his pocket and ten days of hot-air balloon and meme band bosses and one deeply affecting county jail behind him, and he stood in the doorway and looked at the room.</p>
+      <p>Delaney was in an armchair by the window with a venti oat milk latte, two pumps of vanilla, reading a book. She was wearing the complimentary hotel robe over her regular clothes because she had decided she liked it and saw no reason to stop wearing it. She looked entirely, completely, perfectly fine.</p>
+      <p>Buttercup was on the small table beside her. She had already knocked something off it. She was considering the next thing.</p>
+      <p>Delaney looked up when the door opened. She saw Emerson. She saw Willow on his shoulder. She closed her book with a small, warm smile — the one she saved, he knew, for when something she'd been waiting for had finally arrived right on time.</p>
+      <p>"Hi, love," she said.</p>
+      <p>"Hi," Emerson said. His voice was slightly unsteady in a way he wasn't going to apologize for.</p>
+      <p>He crossed the Starbucks. He sat down in the armchair across from her. Willow stepped off his shoulder and onto the armrest and regarded Buttercup with the composed wariness of someone preparing to manage a situation. Buttercup regarded Willow back with fully dilated pupils and then, in a gesture that was either affection or a challenge, head-butted her directly on the nose.</p>
+      <p>Willow blinked. Then, slowly, she began to clean her face. This was as close as Willow got to accepting an apology.</p>
+      <p>"How long have you been here?" Emerson said.</p>
+      <p>"A few days," Delaney said pleasantly. "We've been having a lovely time. There was a spa. We had a very nice dinner — I had a lentil dish, it was wonderful. The hotel had a rooftop." She took a sip of her latte. "How was your trip?"</p>
+      <p>Emerson looked at her. He thought about the seven keys in his pocket and the Sasquatch in the rain and the frogs singing on the mountain and Zach Bryan's hiccup and the Dobro filling the Lion's Lair like something that had needed to happen for a long time.</p>
+      <p>"Really good, actually," he said. "Really, really good."</p>
+      <p>Delaney reached across and took his hand. Outside the Starbucks window, Denver went about its evening, and the mountains were dark shapes against a sky going purple, and somewhere on Colfax the Lion's Lair was playing music, and it was a Tuesday, which Emerson had always found to be a perfectly good day.</p>
+      <p>Buttercup knocked the remaining item off the table. It clattered to the floor.</p>
+      <p>"We don't knock things off tables," Delaney said warmly, not looking up.</p>
+      <p>Emerson laughed. It was the first time he had laughed in ten days and it felt excellent, like something releasing, like a last note ringing until it was gone.</p>
+      <p>"I missed you," he said.</p>
+      <p>"I missed you too," Delaney said. "I also had an incredible time." She squeezed his hand. "Both things can be true."</p>
+      <p>Willow, from the armrest, surveyed the room with the quiet satisfaction of someone who had known how this was going to end for quite some time and had simply been waiting for everyone else to catch up.</p>
+      <p>She did not say I told you so.</p>
+      <p>But she thought it.</p>
+      <div class="reader-end-note">
+        <p><em>fin.</em></p>
+        <p>Thank you for reading.<br>This story was written for Emerson,<br>who would absolutely give you the shirt off his back,<br>and whose banjo playing is, by all accounts,<br>a little too enthusiastic.</p>
+      </div>
+    `,
+    cutaway: null
+  }
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let currentChapterIndex = null;
+
+// ─── DATE LOGIC ───────────────────────────────────────────────────────────────
+function isUnlocked(index) {
+  const now = new Date();
+  return now >= RELEASE_DATES[index];
+}
+
+function daysUntil(index) {
+  const now = new Date();
+  const release = RELEASE_DATES[index];
+  const diff = release - now;
+  if (diff <= 0) return 0;
+  return Math.ceil(diff / (1000 * 60 * 60 * 24));
+}
+
+function formatDate(date) {
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+}
+
+// ─── RENDER CHAPTERS ─────────────────────────────────────────────────────────
+function renderChapters() {
+  const container = document.getElementById('chapters-container');
+  const track = document.getElementById('progress-track');
+  const label = document.getElementById('progress-label');
+  let unlockedCount = 0;
+
+  CHAPTERS.forEach((ch, i) => {
+    const unlocked = isUnlocked(i);
+    if (unlocked) unlockedCount++;
+
+    // progress segment
+    const seg = document.createElement('div');
+    seg.className = 'progress-segment' + (unlocked ? ' unlocked' : '');
+    track.appendChild(seg);
+
+    // card
+    const card = document.createElement('div');
+    card.className = 'chapter-card ' + (unlocked ? 'unlocked' : 'locked');
+    if (unlocked) card.onclick = () => openReader(i);
+
+    const days = daysUntil(i);
+    const countdownStr = days === 1 ? 'Unlocks tomorrow' : days > 1 ? `Unlocks in ${days} days` : '';
+
+    card.innerHTML = `
+      <div class="chapter-card-inner">
+        <div class="chapter-number-col">
+          <div class="chapter-numeral">${ch.number}</div>
+          <span class="chapter-date-small">${formatDate(RELEASE_DATES[i])}</span>
+        </div>
+        <div class="chapter-content-col">
+          <div class="chapter-label-tag">Chapter ${i + 1}</div>
+          <h2 class="chapter-title-main">${ch.title}</h2>
+          <p class="chapter-subtitle-main">${ch.subtitle}</p>
+          ${unlocked ? `
+            <p class="chapter-excerpt">${ch.excerpt}</p>
+            <span class="read-cta">Read chapter →</span>
+          ` : `
+            <div class="locked-indicator">
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                <rect x="2" y="5" width="6" height="7" rx="1" fill="currentColor"/>
+                <path d="M3 5V3.5a2 2 0 114 0V5" stroke="currentColor" stroke-width="1.2" fill="none"/>
+              </svg>
+              Locked
+            </div>
+            ${countdownStr ? `<p class="countdown-text">${countdownStr}</p>` : ''}
+          `}
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  label.textContent = `${unlockedCount} of ${CHAPTERS.length} chapters unlocked`;
+}
+
+// ─── READER ───────────────────────────────────────────────────────────────────
+function openReader(index) {
+  if (!isUnlocked(index)) return;
+  currentChapterIndex = index;
+  renderReader(index);
+  const overlay = document.getElementById('reader-overlay');
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function renderReader(index) {
+  const ch = CHAPTERS[index];
+  const content = document.getElementById('reader-content');
+
+  let cutawayHTML = '';
+  if (ch.cutaway) {
+    cutawayHTML = `
+      <hr class="reader-divider">
+      <div class="reader-cutaway-label">Meanwhile —</div>
+      <div class="reader-cutaway">${ch.cutaway}</div>
+    `;
+  }
+
+  content.innerHTML = `
+    <div class="reader-chapter-label">Chapter ${index + 1}</div>
+    <h2 class="reader-title">${ch.title}</h2>
+    <p class="reader-subtitle">${ch.subtitle}</p>
+    <hr class="reader-rule">
+    <div class="reader-body">${ch.content}</div>
+    ${cutawayHTML}
+  `;
+
+  document.getElementById('prev-btn').disabled = index === 0;
+  const nextUnlocked = index + 1 < CHAPTERS.length && isUnlocked(index + 1);
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.disabled = !nextUnlocked;
+  nextBtn.textContent = nextUnlocked ? 'Next →' : 'Next chapter not yet unlocked';
+
+  document.getElementById('reader-overlay').scrollTop = 0;
+  document.getElementById('reader-inner').scrollTop = 0;
+}
+
+function closeReader() {
+  document.getElementById('reader-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentChapterIndex = null;
+}
+
+function navigateChapter(dir) {
+  const newIndex = currentChapterIndex + dir;
+  if (newIndex < 0 || newIndex >= CHAPTERS.length) return;
+  if (!isUnlocked(newIndex)) return;
+  currentChapterIndex = newIndex;
+  renderReader(newIndex);
+  document.getElementById('reader-overlay').scrollTop = 0;
+}
+
+// close on overlay click
+document.getElementById('reader-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeReader();
+});
+
+// close on escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeReader();
+});
+
+// ─── PASSWORD ─────────────────────────────────────────────────────────────────
+function checkPassword() {
+  if (sessionStorage.getItem('unlocked') === 'yes') {
+    document.getElementById('password-gate').style.display = 'none';
+    renderChapters();
+  }
+}
+
+function submitPassword() {
+  const val = document.getElementById('password-input').value.trim().toLowerCase().replace(/\s/g,'');
+  if (val === 'happybirthday') {
+    sessionStorage.setItem('unlocked', 'yes');
+    const gate = document.getElementById('password-gate');
+    gate.style.opacity = '0';
+    gate.style.transition = 'opacity 0.4s';
+    setTimeout(() => { gate.style.display = 'none'; renderChapters(); }, 400);
+  } else {
+    const err = document.getElementById('password-error');
+    err.style.opacity = '1';
+    document.getElementById('password-input').value = '';
+    setTimeout(() => { err.style.opacity = '0'; }, 2000);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('password-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') submitPassword();
+  });
+  checkPassword();
+});
+</script>
 </body>
 </html>
